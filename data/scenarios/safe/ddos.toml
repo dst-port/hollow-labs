@@ -1,0 +1,32 @@
+# DDoS Mitigation — questions. Placeholders are filled by the generator:
+#   {endpoint} {botnet_subnet} {botnet_prefix} {attack_hits} {misconfig} {verdict}
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "A sharp rise in requests to {endpoint}. DDoS or a legitimate spike?"
+options = ["Legitimate traffic spike", "DDoS attack", "Load balancer error"]
+answer = "1"
+hint = "Look at the per-IP and per-subnet distribution: awk '{print $1}' access.log | sort | uniq -c | sort -rn"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "Which subnet is most of the traffic coming from? Give it as a.b.c.0/24"
+answer = "{botnet_subnet}"
+normalize = "casefold"
+accept = ["{botnet_prefix}/24"]
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "Which misconfiguration in /etc/iptables/rules.v4 let the traffic through? Answer with one of exactly: rate limit / ACCEPT ALL / whitelist"
+answer = "{misconfig}"
+normalize = "casefold"
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "Roughly how many requests hit the attacked endpoint {endpoint}?"
+answer = "{attack_hits}"
+normalize = "digits"

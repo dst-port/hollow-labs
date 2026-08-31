@@ -1,0 +1,46 @@
+# User Access from Unknown IP — questions.
+# Placeholders: {account} {new_ip} {resource} {protocol} {port} {conn_time} {assessment} {verdict}
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "A successful login by {account} from an address not in the connection history. Known IP or anomalous?"
+options = ["Known IP from the office network", "Anomalous, never seen before", "Internal load balancer address"]
+answer = "1"
+hint = "Build the account's address history: grep 'Accepted' auth.log | awk '{print $(NF-3)}' | sort -u — the new address is the odd one out."
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "How did the {account} login from the unknown address end?"
+options = ["Successful login (Accepted)", "Rejected (Failed)", "Session timed out"]
+answer = "0"
+hint = "Look for the line 'Accepted password for {account}' with the new address in the source field."
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "Which IP made the anomalous connection?"
+answer = "{new_ip}"
+normalize = "ip"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "Which internal resource (IP) did the bastion's outbound hop go to?"
+answer = "{resource}"
+normalize = "ip"
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "Which protocol was used to connect to the resource? (SSH / RDP / SMB)"
+answer = "{protocol}"
+normalize = "casefold"
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "Situation assessment: new legitimate user / compromised account / external attacker?"
+answer = "{assessment}"
+normalize = "casefold"

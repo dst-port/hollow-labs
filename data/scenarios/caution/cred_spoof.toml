@@ -1,0 +1,46 @@
+# Credential Spoofing Detection — questions.
+# Placeholders: {user} {corp_ip} {spoof_ip} {spoof_time} {anomaly} {verdict}
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "Account {user} logged in with a valid password. Legitimate login or credential spoofing?"
+options = ["Legitimate login", "Credential spoofing", "Time sync failure"]
+answer = "1"
+hint = "Compare the IP and time of the suspicious session with {user}'s normal activity: grep 'Accepted' /var/log/auth.log"
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "Which address does {user} normally log in from?"
+options = ["{corp_ip}", "{spoof_ip}", "0.0.0.0"]
+answer = "0"
+hint = "Most Accepted lines for this account come from one address."
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "Which IP did the suspicious {user} login come from?"
+answer = "{spoof_ip}"
+normalize = "ip"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "At what time (HH:MM:SS) is the suspicious login recorded?"
+answer = "{spoof_time}"
+normalize = "trim"
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "Which anomaly exactly points to spoofing? Answer with one of exactly: external IP / impossible travel / odd hour / client change"
+answer = "{anomaly}"
+normalize = "casefold"
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "Name of the compromised account?"
+answer = "{user}"
+normalize = "casefold"

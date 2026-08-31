@@ -1,0 +1,47 @@
+# CSRF Detection — questions. Placeholders are filled by the generator:
+#   {endpoint} {attacker_ip} {attacker_origin} {legit_origin} {csrf_reason} {csrf_reason_tag} {attack_hits} {verdict}
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "A run of POSTs to {endpoint} from a foreign origin. Did these requests carry a valid CSRF token?"
+options = ["Yes, the token was valid", "There was no token at all", "There was a token, but expired"]
+answer = "1"
+hint = "grep 'csrf_token=' /var/log/webapp/security.log — check the field value"
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "How should these requests be assessed?"
+options = ["Legitimate user actions", "CSRF attack", "A frontend bug"]
+answer = "1"
+hint = "The requests come from an external origin, with no token, yet the server accepted them"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "Which origin do the suspicious POST requests come from?"
+answer = "{attacker_origin}"
+normalize = "casefold"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "Which IP address sends the cross-site POST requests?"
+answer = "{attacker_ip}"
+normalize = "ip"
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "Why did the server accept a POST with no valid CSRF token? Answer with one of exactly: token / endpoint / origin (see the reason= field in security.log)"
+answer = "{csrf_reason}"
+normalize = "casefold"
+accept = ["{csrf_reason_tag}"]
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "How many cross-site POST requests did the server accept?"
+answer = "{attack_hits}"
+normalize = "digits"

@@ -1,0 +1,47 @@
+# XSS Detection — questions. Placeholders are filled by the generator:
+#   {endpoint} {param} {attacker_ip} {xss_obfuscation} {xss_obfuscation_short} {attack_hits} {verdict}
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "Parameters of {endpoint} contain tags and event handlers. XSS attack or legitimate input?"
+options = ["Legitimate user input", "XSS attempt", "Broken form encoding"]
+answer = "1"
+hint = "grep -Ei \"<script|onerror=|javascript:|%3Cscript|atob\\(\" access.log — note script/onerror"
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "Which class does the attack in the log belong to?"
+options = ["SQL injection", "XSS", "CSRF", "SSRF"]
+answer = "1"
+hint = "The payload runs in the victim's browser, not the database"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "Which IP address sends the requests with the XSS payload?"
+answer = "{attacker_ip}"
+normalize = "ip"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "Which request parameter carries the payload?"
+answer = "{param}"
+normalize = "casefold"
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "How is the payload obfuscated: Plaintext, URL-encoded or Base64?"
+answer = "{xss_obfuscation}"
+normalize = "casefold"
+accept = ["{xss_obfuscation_short}"]
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "How many requests with the XSS payload hit {endpoint}?"
+answer = "{attack_hits}"
+normalize = "digits"

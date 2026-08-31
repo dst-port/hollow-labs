@@ -1,0 +1,165 @@
+# Quiz — core IR/SOC theory. No placeholders, fixed answers.
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "Which phase comes first in the NIST incident response lifecycle?"
+options = ["Containment", "Preparation", "Eradication", "Recovery"]
+answer = "1"
+hint = "It is what you do before an incident."
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "What is an IOC?"
+options = [
+  "Indicator of Compromise",
+  "Infrastructure Orchestration Controller",
+  "Incident Operations Console",
+  "Internal Operations Center",
+]
+answer = "0"
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "Authentication logs on a typical Linux host are written to..."
+options = ["/var/log/syslog", "/var/log/auth.log", "/var/log/kern.log", "/var/log/messages"]
+answer = "1"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "Two words for an attacker moving sideways between hosts inside the perimeter."
+answer = "lateral movement"
+normalize = "casefold"
+accept = ["lateral-movement", "lateralmovement"]
+
+[[question]]
+level = "intermediate"
+kind = "choice"
+prompt = "An attacker wants their foothold to survive a reboot. Which MITRE ATT&CK tactic is this?"
+options = ["Persistence", "Discovery", "Exfiltration", "Impact"]
+answer = "0"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "One word for keeping logs so they cannot be altered after the fact."
+answer = "immutability"
+normalize = "casefold"
+accept = ["worm", "append-only"]
+
+[[question]]
+level = "advanced"
+kind = "choice"
+prompt = "Which of these is NOT a sign that an alert is a false positive?"
+options = [
+  "The activity matches a scheduled vulnerability scan window",
+  "The source is a known monitoring address",
+  "The parameter payload decodes to valid SQL querying information_schema",
+  "It coincides with a spike of legitimate marketing traffic",
+]
+answer = "2"
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "Name the model that describes an intrusion as a chain of 7 stages from recon to actions on objectives (three words)."
+answer = "cyber kill chain"
+normalize = "casefold"
+accept = ["kill chain", "lockheed kill chain"]
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "What is a SIEM primarily for?"
+options = [
+  "Central collection and correlation of security events",
+  "Disk encryption on servers",
+  "Managing patch deployment",
+  "Backing up databases",
+]
+answer = "0"
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "The information security triad is confidentiality, integrity and..."
+options = ["availability", "authentication", "auditability", "anonymity"]
+answer = "0"
+hint = "C-I-A."
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "In the MITRE ATT&CK matrix, a \"tactic\" is..."
+options = [
+  "a specific command the attacker ran",
+  "the attacker's goal at this stage (why they do it)",
+  "the hash of a malware sample",
+  "a vulnerability identifier in the CVE database",
+]
+answer = "1"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "One word for a document with a step-by-step response procedure for a specific incident type."
+answer = "playbook"
+normalize = "casefold"
+accept = ["runbook", "incident playbook"]
+
+[[question]]
+level = "intermediate"
+kind = "choice"
+prompt = "An analyst disconnects an infected host from the network. Which NIST lifecycle phase is this?"
+options = [
+  "Detection and Analysis",
+  "Containment, Eradication and Recovery",
+  "Post-Incident Activity",
+  "Preparation",
+]
+answer = "1"
+
+[[question]]
+level = "intermediate"
+kind = "choice"
+prompt = "In the SANS PICERL model, the letter E stands for..."
+options = ["Escalation", "Eradication", "Evidence", "Endpoint"]
+answer = "1"
+
+[[question]]
+level = "advanced"
+kind = "choice"
+prompt = "Cyber kill chain: at which stage has the malware been delivered to the recipient but not yet triggered?"
+options = ["Weaponization", "Delivery", "Exploitation", "Installation"]
+answer = "1"
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "The MITRE ATT&CK tactic for moving stolen data out of the network (one word)."
+answer = "exfiltration"
+normalize = "casefold"
+accept = ["exfil", "data exfiltration"]
+
+[[question]]
+level = "advanced"
+kind = "choice"
+prompt = "Why keep a chain of custody in an investigation?"
+options = [
+  "to speed up service recovery",
+  "so the collected evidence is admissible as proof",
+  "to reduce the volume of stored logs",
+  "to cut the attacker off faster",
+]
+answer = "1"
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "The class of response-automation tooling that orchestrates playbook actions (acronym)."
+answer = "soar"
+normalize = "casefold"
+accept = ["security orchestration automation and response"]

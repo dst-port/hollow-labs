@@ -1,0 +1,24 @@
+[package]
+name = "hollow-labs"
+version = "0.1.0"
+edition = "2021"
+description = "A TUI trainer for IR/SOC analysts: attack simulation with dynamic artifact and quiz generation"
+license = "MIT"
+repository = "https://github.com/dst-port/hollow-labs"
+
+[[bin]]
+name = "hollow-labs"
+path = "src/main.rs"
+
+[dependencies]
+ratatui = "0.29"
+crossterm = "0.28"
+serde = { version = "1", features = ["derive"] }
+toml = "0.8"
+
+[profile.release]
+strip = true
+lto = true
+opt-level = "z"
+panic = "abort"
+codegen-units = 1

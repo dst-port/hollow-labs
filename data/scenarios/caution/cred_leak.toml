@@ -1,0 +1,47 @@
+# Credential Leak Detection — questions.
+# Placeholders: {secret_file} {proc} {pid} {user} {dest} {dest_kind} {verdict}
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "A process accessed a sensitive file. Legitimate access or a credential leak?"
+options = ["Legitimate application access", "Credential leak", "Scheduled backup"]
+answer = "1"
+hint = "Look for the read by audit key: ausearch -k secrets. Legitimate backups run as root on a schedule, not as an application user."
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "Which file did the suspicious process access?"
+options = ["/etc/hosts", "/var/log/app/access.log", "{secret_file}"]
+answer = "2"
+hint = "The type=PATH line next to key=\"secrets\"."
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "Which PID read the file {secret_file}?"
+answer = "{pid}"
+normalize = "digits"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "Which process (comm) performed the secret read?"
+answer = "{proc}"
+normalize = "casefold"
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "Where did the data go? (external IP / local dump / unknown)"
+answer = "{dest_kind}"
+normalize = "casefold"
+accept = ["{dest}"]
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "Full path of the secret file that was read?"
+answer = "{secret_file}"
+normalize = "trim"

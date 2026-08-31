@@ -1,0 +1,158 @@
+# Quiz — detection ops: SIEM/alerting, false positives, rule tuning, triage, severity.
+# No placeholders, fixed answers.
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "A rule fired on activity known to be legitimate. What is this called?"
+options = ["true positive", "false positive", "false negative", "true negative"]
+answer = "1"
+hint = "There is an alert but no threat."
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "An attack happened but no rule fired. This is a..."
+options = ["false positive", "false negative", "true positive", "benign trigger"]
+answer = "1"
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "What does severity = critical on an alert usually mean?"
+options = [
+  "low priority, can be reviewed later",
+  "requires immediate response",
+  "it is only an informational event",
+  "the alert was created for testing",
+]
+answer = "1"
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "How does triage of an incoming alert start?"
+options = [
+  "by immediately isolating the host",
+  "by checking the context and validity of the trigger",
+  "by closing the alert as a false positive",
+  "by reporting to management",
+]
+answer = "1"
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "The main job of the correlation engine in a SIEM is to..."
+options = [
+  "link events from different sources into one chain",
+  "store config backups",
+  "issue TLS certificates",
+  "manage user accounts",
+]
+answer = "0"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "One word for refining a rule to cut noise without losing detection."
+answer = "tuning"
+normalize = "casefold"
+accept = ["rule tuning", "tune"]
+
+[[question]]
+level = "intermediate"
+kind = "choice"
+prompt = "One rule produces 200 hits a day, all from a single scheduled vulnerability scanner. Best action?"
+options = [
+  "disable the rule entirely",
+  "add an exclusion for the scanner address and scan window",
+  "raise the severity so it stands out more",
+  "keep closing them manually every day",
+]
+answer = "1"
+
+[[question]]
+level = "intermediate"
+kind = "choice"
+prompt = "The metric \"share of real incidents among all fired alerts\" is..."
+options = ["recall", "precision", "uptime", "throughput"]
+answer = "1"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "The acronym for \"mean time to respond to / resolve an incident\"."
+answer = "mttr"
+normalize = "casefold"
+accept = ["mean time to respond", "mean time to resolve", "mean time to remediate"]
+
+[[question]]
+level = "intermediate"
+kind = "choice"
+prompt = "Alert: \"admin login outside business hours\". What confirms legitimacy fastest?"
+options = [
+  "cross-check with the on-call schedule and change tickets",
+  "immediately lock the account",
+  "reimage the workstation",
+  "escalate to the legal department",
+]
+answer = "0"
+
+[[question]]
+level = "advanced"
+kind = "choice"
+prompt = "Why deduplicate and group similar hits into one incident in an alert pipeline?"
+options = [
+  "to hide false positives from audit",
+  "to reduce alert fatigue and speed up triage",
+  "to reduce the volume of stored logs",
+  "to get around SIEM licensing limits",
+]
+answer = "1"
+
+[[question]]
+level = "advanced"
+kind = "choice"
+prompt = "A rule with high recall and low precision is typical of..."
+options = [
+  "a narrow signature for a specific IOC",
+  "a broad behavioral heuristic",
+  "an allowlist-based rule",
+  "a disabled rule",
+]
+answer = "1"
+
+[[question]]
+level = "advanced"
+kind = "choice"
+prompt = "To prioritize new detection development, a team builds a coverage heat map against..."
+options = ["OWASP Top 10", "MITRE ATT&CK", "the CVSS scale", "ISO 27001 controls"]
+answer = "1"
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "The feed of fresh indicators of compromise plugged into a SIEM to enrich events (two words)."
+answer = "threat intelligence"
+normalize = "casefold"
+accept = ["threat intel", "threat intelligence feed", "threat intel feed", "ioc feed"]
+
+[[question]]
+level = "advanced"
+kind = "choice"
+prompt = "Ransomware runs on a file server with company-wide access. What severity fits the impact x likelihood model?"
+options = ["informational", "low", "medium", "high/critical"]
+answer = "3"
+
+[[question]]
+level = "advanced"
+kind = "choice"
+prompt = "An analyst closes an alert as a false positive. What is critical to do so it benefits detection?"
+options = [
+  "just close it with no comment",
+  "record the reason and, if needed, file an exclusion or a tuning request",
+  "delete the log source that produced the alert",
+  "lower the severity of every rule from that source",
+]
+answer = "1"

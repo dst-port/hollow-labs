@@ -1,0 +1,46 @@
+# Bruteforce Detection — questions.
+# Placeholders: {attacker_ip} {target_user} {attempts} {service} {mode} {outcome} {verdict}
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "Many failed authentication attempts against the {service} service. Password guessing or just a user making mistakes?"
+options = ["The user kept fumbling the password", "Brute-force attack", "Client-side time desync"]
+answer = "1"
+hint = "grep -E 'Failed password|authentication failure' auth.log — one source, dozens of attempts in a row."
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "Which account was the guessing aimed at?"
+options = ["{target_user}", "monitor", "ansible"]
+answer = "0"
+hint = "The name after 'for' / 'ruser=' / 'user=' is the same in every line of the run."
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "Which IP is the guessing coming from?"
+answer = "{attacker_ip}"
+normalize = "ip"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "How many failed login attempts are in the run in total? (cross-check with 'Total failed' in fail2ban)"
+answer = "{attempts}"
+normalize = "digits"
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "Manual guessing or an automated tool? Answer verbatim: \"manual guessing\" or \"automated tool\" (judge by the intervals between attempts)."
+answer = "{mode}"
+normalize = "casefold"
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "Did the attacker eventually get in? (yes / no — is there a successful-login line from the same IP)"
+answer = "{outcome}"
+normalize = "casefold"

@@ -1,0 +1,46 @@
+# Internal Breaches Detection — questions.
+# Placeholders: {user} {resource} {method} {src_host} {target_host} {access_time} {verdict}
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "An internal user accessed a resource outside their area of responsibility. Legitimate access or an internal breach?"
+options = ["Legitimate work access", "Internal breach (lateral movement)", "A backup indexing error"]
+answer = "1"
+hint = "Look at sudo ... COMMAND= in auth.log and key=\"restricted\" in audit.log — access to a restricted directory."
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "Which resource was accessed without authorization?"
+options = ["/srv/pub/readme.txt", "{resource}", "/etc/hosts"]
+answer = "1"
+hint = "The type=PATH line next to key=\"restricted\"."
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "Which account reached beyond its privileges?"
+answer = "{user}"
+normalize = "casefold"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "Which internal host (IP) was the access from?"
+answer = "{src_host}"
+normalize = "ip"
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "By which method was access gained? (privilege escalation / credential reuse / misconfigured permissions)"
+answer = "{method}"
+normalize = "casefold"
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "Full path of the restricted resource that was accessed?"
+answer = "{resource}"
+normalize = "trim"

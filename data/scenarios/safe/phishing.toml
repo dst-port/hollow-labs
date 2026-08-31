@@ -1,0 +1,48 @@
+# Phishing Detection — questions. Placeholders are filled by the generator:
+#   {spoofed_domain} {from_domain} {real_domain} {sender_ip} {phish_technique}
+#   {phish_technique_alt} {attack_hits} {verdict}
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "The message impersonates the service {spoofed_domain}. Phishing or a legitimate mailing?"
+options = ["Legitimate mailing", "Phishing", "Ordinary spam, no threat"]
+answer = "1"
+hint = "Compare From with Return-Path and Received, check Authentication-Results (spf/dkim/dmarc)"
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "Should you trust the sender and links in this message?"
+options = ["Yes, the sender is verified", "No, the sender is forged"]
+answer = "1"
+hint = "SPF/DMARC in the headers are set to fail"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "The real source domain of the message (from Received / Return-Path)?"
+answer = "{real_domain}"
+normalize = "casefold"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "The IP address of the server that sent the message (from Received)?"
+answer = "{sender_ip}"
+normalize = "ip"
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "Sender-forgery technique: Typosquatting, Spoofing or Homograph? Answer with one of the three exactly."
+answer = "{phish_technique}"
+normalize = "casefold"
+accept = ["{phish_technique_alt}"]
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "How many phishing messages are in mail.log?"
+answer = "{attack_hits}"
+normalize = "digits"

@@ -1,0 +1,47 @@
+# SQLi Detection — questions. Placeholders are filled by the generator:
+#   {endpoint} {param} {attacker_ip} {sqli_type} {sqli_type_short} {attack_hits} {verdict}
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "The log for {endpoint} shows requests with SQL fragments in parameters. Attack or legitimate traffic?"
+options = ["Legitimate traffic", "SQL injection", "Just a noisy scanner, no harm"]
+answer = "1"
+hint = "grep -Ei \"union|select|' or |-- |extractvalue\" /var/log/nginx/access.log — legitimate requests do not look like this"
+
+[[question]]
+level = "beginner"
+kind = "choice"
+prompt = "Which class does the attack in the log belong to?"
+options = ["XSS", "SQL injection", "CSRF", "Path traversal"]
+answer = "1"
+hint = "The payloads use SQL syntax and reach into database tables"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "Which IP address sends the requests with the SQLi payload?"
+answer = "{attacker_ip}"
+normalize = "ip"
+
+[[question]]
+level = "intermediate"
+kind = "free"
+prompt = "Which request parameter carries the injection?"
+answer = "{param}"
+normalize = "casefold"
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "SQL injection type by payload: Union-based, Boolean-based or Error-based?"
+answer = "{sqli_type}"
+normalize = "casefold"
+accept = ["{sqli_type_short}"]
+
+[[question]]
+level = "advanced"
+kind = "free"
+prompt = "How many requests with the SQLi payload hit {endpoint}?"
+answer = "{attack_hits}"
+normalize = "digits"
